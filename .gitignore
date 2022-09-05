@@ -1,0 +1,13 @@
+/Database-log.db
+/Database.bak.db
+/Database.db
+/.idea/*
+/.git/*
+/bin/*
+/obj/*
+/node_modules/*
+/gulpfile.js
+/Folder.DotSettings.user
+*/bin/*
+*/obj/*
+/PavlovRconWebserverProject.sln.DotSettings.user
