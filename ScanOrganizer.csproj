@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="PdfSharp" Version="1.50.5147" />
+      <PackageReference Include="System.Data.SQLite.EF6" Version="1.0.116" />
+      <PackageReference Include="Tesseract" Version="4.1.1" />
+      <PackageReference Include="Tesseract.Net.SDK" Version="4.5.411" />
+    </ItemGroup>
+
+</Project>
