@@ -1,10 +1,8 @@
-using Dapper;
-using Microsoft.AspNetCore.Builder;
+
+using Hangfire;
 using WebApplication1.Data;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using ScanOrganizer.Extensions;
 using ScanOrganizer.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,11 +13,36 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite(connectionString));
 builder.Services.AddControllersWithViews();
+  
+//Hangfire
+builder.Services.AddHangfire(x => x.UseInMemoryStorage());
+builder.Services.AddHangfireServer(x => { x.WorkerCount = 1; });
 
 //Services
-builder.Services.AddScoped<SettingsService>();
+builder.Services.AddScoped<OcrTagService>();
+builder.Services.AddScoped<FolderScanService>();
+builder.Services.AddSingleton<MonitorFolderService>();
 
 var app = builder.Build();
+app.UseHangfireDashboard();
+
+//MonitorFolders
+var monitorFolderService = app.Services.GetService<MonitorFolderService>();
+RecurringJob.AddOrUpdate(
+    () => monitorFolderService.MonitorFolders(),
+    "*/5 * * * *"); // Check server states
+
+//Migrate db
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<ApplicationDbContext>();     
+    
+    context.Database.Migrate();
+}
+
+
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
