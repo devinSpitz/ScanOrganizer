@@ -12,7 +12,7 @@ jobs:
     steps:
       - checkout
       - run:
-          working_directory: ./artifacts/ScanOrganizer
+          working_directory: .
           name: Run Build Windows
           command: |
             apt update
