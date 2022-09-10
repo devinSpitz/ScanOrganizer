@@ -39,12 +39,18 @@ public class FolderScanService
             modelStateDictionary?.AddModelError("MonitorFolderPath", "A parent folder of this folder is already monitored");
             return false;
         }
-        
-        if(!folderScan.ResultFolderPath.EndsWith("\\"))
+
+        if (!folderScan.ResultFolderPath.EndsWith("\\"))
+        {
             modelStateDictionary?.AddModelError("ResultFolderPath", "The path has to end with \\");
-        
-        if(!folderScan.MonitorFolderPath.EndsWith("\\"))
+            return false;
+        }
+
+        if (!folderScan.MonitorFolderPath.EndsWith("\\"))
+        {
             modelStateDictionary?.AddModelError("MonitorFolderPath", "The path has to end with \\");
+            return false;
+        }
         
         //write test file into folderScan.ResultFolderPath and remove to check if folder is writable
         if (!await IsFolderWriteable(folderScan.ResultFolderPath))
