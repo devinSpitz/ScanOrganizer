@@ -40,7 +40,24 @@ public class FolderScanService
             return false;
         }
         
-        if (folderScan.Id <= 0)
+        //write test file into folderScan.ResultFolderPath and remove to check if folder is writable
+        if (!await IsFolderWriteable(folderScan.ResultFolderPath))
+        {
+            modelStateDictionary?.AddModelError("ResultFolderPath", "Folder is not writable");
+            return false;
+        }
+
+        //write test file into folderScan.MonitorFolderPath and remove to check if folder is writable
+       if(folderScan.DeleteSourceWhenFinished)
+       {
+           if (!await IsFolderWriteable(folderScan.MonitorFolderPath))
+           {
+               modelStateDictionary?.AddModelError("MonitorFolderPath", "Folder is not writable");
+               return false;
+           }
+       }
+       
+       if (folderScan.Id <= 0)
         {
             await _dbContext.FolderScans.AddAsync(folderScan);
         }
@@ -57,7 +74,24 @@ public class FolderScanService
         await _dbContext.SaveChangesAsync();
         return true;
     }
-    
+
+    private static async Task<bool> IsFolderWriteable(string path)
+    {
+        bool isWriteable = true;
+        var testFilePath = Path.Combine(path, "test.txt");
+        try
+        {
+            await File.WriteAllTextAsync(testFilePath, "test");
+            File.Delete(testFilePath);
+        }
+        catch (Exception)
+        {
+            isWriteable = false;
+        }
+
+        return isWriteable;
+    }
+
     public async Task<bool> Remove(int id)
     {
         if (id > 0)
