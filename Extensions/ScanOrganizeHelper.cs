@@ -33,7 +33,7 @@ public static class ScanOrganizeHelper
                 .GetAwaiter()
                 .GetResult();
             if (scan == null) return;
-            scan.Exceptions.Add(new FolderScanExceptions(e.InnerException?.Message, e.Message));
+            scan.Exceptions?.Add(new FolderScanExceptions(e.InnerException?.Message, e.Message));
             folderScanService.Upsert(scan, null).GetAwaiter().GetResult();
         }
     }

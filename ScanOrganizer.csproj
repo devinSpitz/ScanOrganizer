@@ -4,7 +4,7 @@
         <TargetFramework>net6.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-        <AssemblyVersion>0.1</AssemblyVersion>
+        <AssemblyVersion>0.1.0.1</AssemblyVersion>
     </PropertyGroup>
 
     <ItemGroup>
@@ -37,6 +37,12 @@
 
     <ItemGroup>
       <Content Include=".circleci\config.yml" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="pdfium.dll">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>

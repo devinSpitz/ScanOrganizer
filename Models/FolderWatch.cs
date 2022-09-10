@@ -213,6 +213,7 @@ public class FolderWatch
             }
             //extract text from pdf
             PdfOcrOrganizeJob(eFullPath,pdf,text).GetAwaiter().GetResult();
+            return;
             
         }
         if (!IsImage(eFullPath)) return;

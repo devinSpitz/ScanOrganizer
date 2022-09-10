@@ -19,7 +19,7 @@ public class FolderScan
     public bool IncludeSubFolders { get; set; } = true;
     
     [DisplayName("Failures")]
-    public List<FolderScanExceptions> Exceptions { get; set; } = new List<FolderScanExceptions>();
+    public List<FolderScanExceptions>? Exceptions { get; set; } = new List<FolderScanExceptions>();
     
     [DisplayName("Delete source when finished")]
     public bool DeleteSourceWhenFinished { get; set; } = true;
