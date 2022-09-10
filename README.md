@@ -1,10 +1,19 @@
 # ScanOrganizer
 
-
 Features:
 =======
 * Sort your scans into folders by SortTags
 * Add Folders to the monitoring to automatically sort new scans in form of images or pdfs
+
+Installation:
+=======
+* Download latest release
+* Download [NSSM](https://nssm.cc/download) and extract the exe to the same folder as ScanOrganizer.exe
+* Copy the x64 nssm.exe to the ScanOrganizer folder
+* Run the following command in the ScanOrganizer folder in cmd as Administrator: `nssm.exe install ScanOrganizer`
+* And also: `nssm.exe start ScanOrganizer`
+* Note in powershell use ./nssm.exe instead of nssm.exe
+* After the Scan Organizer should be ready to configure via your Browser: [http://localhost:5000/](http://localhost:5000/)
 
 Good to know:
 =======

@@ -1,8 +1,15 @@
 
+using System.Reflection;
 using Hangfire;
 using WebApplication1.Data;
 using Microsoft.EntityFrameworkCore;
 using ScanOrganizer.Services;
+
+if (args.Length > 0 && args[0] == "--version")
+{
+    Console.WriteLine(Assembly.GetEntryAssembly()?.GetName().Version);
+    Environment.Exit(0);
+}
 
 var builder = WebApplication.CreateBuilder(args);
 

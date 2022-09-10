@@ -4,6 +4,7 @@
         <TargetFramework>net6.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+        <AssemblyVersion>0.1</AssemblyVersion>
     </PropertyGroup>
 
     <ItemGroup>
@@ -32,6 +33,10 @@
 
     <ItemGroup>
       <Folder Include="Migrations" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include=".circleci\config.yml" />
     </ItemGroup>
 
 </Project>
