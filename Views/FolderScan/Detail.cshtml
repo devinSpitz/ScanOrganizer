@@ -1,10 +1,61 @@
-﻿@model FolderScan
+﻿@using TesseractSharp
+@model FolderScan
 
 @{
-    ViewBag.Title = "title";
+    ViewBag.Title = "New/Edit Folder to monitor";
     Layout = "_Layout";
+
+    var languagesDictionary = Enum.GetValues(typeof(Language))
+        .Cast<Language>()
+        .Select(t => t.ToString())
+        .ToList();
 }
 
-<h2>title</h2>
+<h2>@ViewBag.Title</h2>
+<form asp-controller="FolderScan" asp-action="Upsert" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="col-md-11">
+        <div class="card m-1 m-1">
+            <div class="card-header">Settings</div>
+            <div class="card-body row">
 
-@* Todo *@
+                <input asp-for="Id" class="form-control" value="@Model.Id" type="hidden"/>
+                <span asp-validation-for="Id" class="text-danger"></span>
+                    <div class="form-group col-md-2">
+                        <label asp-for="IsActive"></label>
+                        <input asp-for="IsActive" class="form-control form-check-input" value="@Model.IsActive"/>
+                        <span asp-validation-for="IsActive" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label asp-for="IncludeSubFolders"></label>
+                        <input asp-for="IncludeSubFolders" class="form-control form-check-input" value="@Model.IncludeSubFolders"/>
+                        <span asp-validation-for="IncludeSubFolders" class="text-danger"></span>
+                    </div>
+                <div class="form-group col-md-3">
+                    <label asp-for="DeleteSourceWhenFinished"></label>
+                    <input asp-for="DeleteSourceWhenFinished" class="form-control form-check-input" value="@Model.DeleteSourceWhenFinished"/>
+                    <span asp-validation-for="DeleteSourceWhenFinished" class="text-danger"></span>
+                </div>
+                
+                    <div class="form-group col-md-5">
+                        <label asp-for="Languages"></label>
+                        @Html.ListBoxFor(m => m.LanguagesDictionary, new MultiSelectList(languagesDictionary,  Model.Languages.Split(",")), new {@class = "form-control form-control-sm"})
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label asp-for="MonitorFolderPath"></label>
+                        <input asp-for="MonitorFolderPath" class="form-control" value="@Model.MonitorFolderPath"/>
+                        <span asp-validation-for="MonitorFolderPath" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label asp-for="ResultFolderPath"></label>
+                        <input asp-for="ResultFolderPath" class="form-control" value="@Model.ResultFolderPath"/>
+                        <span asp-validation-for="ResultFolderPath" class="text-danger"></span>
+                    </div>
+            </div>
+        </div>
+        <div class="saveButton col-md-1 mt-3">
+            <button type="submit" class="btn btn-success col-md-12">Save</button>
+        </div>
+    </div>
+
+</form>

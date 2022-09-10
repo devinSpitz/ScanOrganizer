@@ -2,12 +2,12 @@
 using Hangfire;
 using WebApplication1.Data;
 using Microsoft.EntityFrameworkCore;
-using ScanOrganizer.Extensions;
 using ScanOrganizer.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 builder.Services.AddControllersWithViews();
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -19,7 +19,7 @@ builder.Services.AddHangfire(x => x.UseInMemoryStorage());
 builder.Services.AddHangfireServer(x => { x.WorkerCount = 1; });
 
 //Services
-builder.Services.AddScoped<OcrTagService>();
+builder.Services.AddScoped<SortTagService>();
 builder.Services.AddScoped<FolderScanService>();
 builder.Services.AddSingleton<MonitorFolderService>();
 
@@ -28,9 +28,11 @@ app.UseHangfireDashboard();
 
 //MonitorFolders
 var monitorFolderService = app.Services.GetService<MonitorFolderService>();
+
 RecurringJob.AddOrUpdate(
     () => monitorFolderService.MonitorFolders(),
     "*/5 * * * *"); // Check server states
+RecurringJob.TriggerJob("MonitorFolderService.MonitorFolders");
 
 //Migrate db
 using (var scope = app.Services.CreateScope())

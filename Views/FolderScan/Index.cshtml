@@ -1,9 +1,129 @@
-﻿@model dynamic
+﻿@model FolderScan[]
 
 @{
-    ViewBag.Title = "title";
+    ViewBag.Title = "Folders to Monitor";
     Layout = "_Layout";
 }
 
-<h2>title</h2>
-@* Todo *@
+
+<h2>
+    @ViewBag.Title
+    <a class="btn btn-sm btn-primary" asp-area="" asp-controller="FolderScan" asp-action="EditFolder">
+        <span class="fas fa-plus"></span>
+    </a>
+</h2>
+
+            <table id="Datatables" class="table  text-nowrap  table-sm table-bordered table-responsive col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Actions</th>
+                    <th>Source path</th>
+                    <th>Destination path</th>
+                    <th>Enabled</th>
+                    <th>Include subfolders</th>
+                    <th>Languages</th>
+                    <th>Problems</th>
+                </tr>
+                </thead>
+                <tbody>
+    @foreach (var folderScan in Model)
+    {
+                    var bg = "";
+                    if (folderScan.Exceptions.Count > 0)
+                    {
+                        bg = "bg-danger";
+                    }
+                    else if (folderScan.IsActive == false)
+                    {
+                        bg = "bg-warning";
+                    }
+                    else
+                    {
+                        bg = "bg-success";
+                    }
+                    <tr class="@bg">
+                        <td> @folderScan.Id </td>
+                        
+                        <td >
+                            <a class="btn btn-primary btn-sm btn-primary" href="@Url.Action("EditFolder", "FolderScan", new {id = folderScan.Id})">
+                                <span class="fas fa-pencil-alt"></span>
+                            </a>
+                            @if (folderScan.IsActive)
+                            {
+                                <a class="btn btn-danger btn-sm btn-primary" href="@Url.Action("Disable", "FolderScan", new {id = folderScan.Id})">
+                                    <span class="fas fa-times-circle"></span>
+                                </a>
+                            }
+                            else
+                            {
+                                <a class="btn btn-success btn-sm btn-primary" href="@Url.Action("Enable", "FolderScan", new {id = folderScan.Id})">
+                                    <span class="fas fa-check"></span>
+                                </a>
+                            }
+                            <a class="btn btn-danger btn-sm btn-primary" href="@Url.Action("Remove", "FolderScan", new {id = folderScan.Id})">
+                                <span class="fas fa-trash-alt"></span>
+                            </a>
+                        </td>
+                        <td> @folderScan.MonitorFolderPath </td>
+                        <td> @folderScan.ResultFolderPath </td>
+                        <td> @folderScan.IsActive </td>
+                        <td> @folderScan.IncludeSubFolders </td>
+                        <td> @folderScan.Languages </td>
+                        <td>
+                            <ul>
+                                @foreach (var problem in folderScan.Exceptions)
+                                {
+                                    <li>
+                                        <ul>
+                                            <li>
+                                                Message:
+                                                <div class="alert alert-danger" role="alert">
+                                                    @problem.Message
+                                                </div>
+                                            </li>
+                                            @if (problem.InnerExceptionMessage != null)
+                                            {
+                                                <li>
+                                                    InnerMessage
+                                                    <div class="alert alert-danger" role="alert">
+                                                        @problem.InnerExceptionMessage
+                                                    </div>
+                                                </li>
+                                            }
+
+                                        </ul>
+                                    </li>
+                                }
+                            </ul>
+                            
+                            <a class="btn btn-danger btn-sm btn-primary" href="@Url.Action("RemoveExceptions", "FolderScan", new {id = folderScan.Id})">
+                                <span class="fas fa-trash-alt"></span>
+                            </a>
+                        </td>
+        
+                    </tr>
+    }
+                       </tbody>
+                            </table>
+<script>
+
+    function init()
+    {
+        debugger;
+         let table = $("#Datatables");
+          table.DataTable({
+               "order": [[ 4, "desc" ],
+                [ 0, "desc" ]],
+              responsive: true,
+              "autoWidth": true,
+              filter: true, 
+              "paging":   false,
+               "bInfo": false,
+               "ordering": true
+              });   
+        
+    };
+    
+    
+</script>

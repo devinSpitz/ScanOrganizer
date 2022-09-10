@@ -1,0 +1,94 @@
+﻿@model SortTag[]
+
+@{
+    ViewBag.Title = "Sort Tags";
+    Layout = "_Layout";
+}
+
+
+<h2>
+    @ViewBag.Title
+    <a class="btn btn-sm btn-primary" asp-area="" asp-controller="SortTag" asp-action="EditSortTag">
+        <span class="fas fa-plus"></span>
+    </a>
+</h2>
+
+            <table id="Datatables" class="table  text-nowrap  table-sm table-bordered table-responsive col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Actions</th>
+                    <th>FindTag</th>
+                    <th>FolderName</th>
+                    <th>IsActive</th>
+                    <th>SortOrder</th>
+                    <th>FolderType</th>
+                    <th>UseRegex</th>
+                </tr>
+                </thead>
+                <tbody>
+    @foreach (var sortTag in Model)
+    {
+                    var bg = "";
+                    @if (sortTag.IsActive)
+                    {
+                        bg = "bg-success";
+                    }
+                    else
+                    {
+                        bg = "bg-warning";
+                    }
+                    <tr class="@bg">
+                        <td> @sortTag.Id </td>
+                        
+                        <td >
+                            <a class="btn btn-primary btn-sm btn-primary" href="@Url.Action("EditSortTag", "SortTag", new {id = sortTag.Id})">
+                                <span class="fas fa-pencil-alt"></span>
+                            </a>
+                            @if (sortTag.IsActive)
+                            {
+                                <a class="btn btn-danger btn-sm btn-primary" href="@Url.Action("Disable", "SortTag", new {id = sortTag.Id})">
+                                    <span class="fas fa-times-circle"></span>
+                                </a>
+                            }
+                            else
+                            {
+                                <a class="btn btn-success btn-sm btn-primary" href="@Url.Action("Enable", "SortTag", new {id = sortTag.Id})">
+                                    <span class="fas fa-check"></span>
+                                </a>
+                            }
+                            <a class="btn btn-danger btn-sm btn-primary" href="@Url.Action("Remove", "SortTag", new {id = sortTag.Id})">
+                                <span class="fas fa-trash-alt"></span>
+                            </a>
+                        </td>
+                        <td> @sortTag.FindTag </td>
+                        <td> @sortTag.FolderName </td>
+                        <td> @sortTag.IsActive </td>
+                        <td> @sortTag.SortOrder </td>
+                        <td> @sortTag.FolderType </td>
+                        <td> @sortTag.UseRegex </td>
+        
+                    </tr>
+    }
+                       </tbody>
+                            </table>
+<script>
+
+    function init()
+    {
+        debugger;
+         let table = $("#Datatables");
+          table.DataTable({
+               "order": [[ 4, "desc" ],[ 5, "asc" ]],
+              responsive: true,
+              "autoWidth": true,
+              filter: true, 
+              "paging":   false,
+               "bInfo": false,
+               "ordering": true
+              });   
+        
+    };
+    
+    
+</script>

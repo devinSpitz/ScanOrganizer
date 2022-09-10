@@ -1,0 +1,63 @@
+﻿@using TesseractSharp
+@using TesseractSharp.Core
+@model SortTag
+
+@{
+    ViewBag.Title = "New/Edit Sort Tag";
+    Layout = "_Layout";
+    var FolderType = Enum.GetValues(typeof(TagFolderType))
+        .Cast<TagFolderType>()
+        .Select(t => t.ToString())
+        .ToList();
+}
+
+<h2>@ViewBag.Title</h2>
+<div class="card m-1 bg-info">
+</div>
+<form asp-controller="SortTag" asp-action="Upsert" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="col-md-11">
+        <div class="card m-1 m-1">
+            <div class="card-header">Settings</div>
+            <div class="card-body row">
+
+                <input asp-for="Id" class="form-control" value="@Model.Id" type="hidden"/>
+                <span asp-validation-for="Id" class="text-danger"></span>
+                    <div class="form-group col-md-2">
+                        <label asp-for="IsActive"></label>
+                        <input asp-for="IsActive" class="form-control form-check-input" value="@Model.IsActive"/>
+                        <span asp-validation-for="IsActive" class="text-danger"></span>
+                    </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="UseRegex"></label>
+                    <input asp-for="UseRegex" class="form-control form-check-input" value="@Model.UseRegex"/>
+                    <span asp-validation-for="UseRegex" class="text-danger"></span>
+                </div>
+                
+                    <div class="form-group col-md-2">
+                        <label asp-for="SortOrder"></label>
+                        <input asp-for="SortOrder" class="form-control" value="@Model.SortOrder"/>
+                        <span asp-validation-for="SortOrder" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="FindTag"></label>
+                        <input asp-for="FindTag" class="form-control" value="@Model.FindTag"/>
+                        <span asp-validation-for="FindTag" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="FolderName"></label>
+                        <input asp-for="FolderName" class="form-control" value="@Model.FolderName"/>
+                        <span asp-validation-for="FolderName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="FolderType"></label>
+                        @Html.DropDownListFor(m => m.FolderType, new SelectList(FolderType, Model.FolderType), new {@class = "form-control form-control-sm form-select "})
+                    </div>
+            </div>
+        </div>
+        <div class="saveButton col-md-1 mt-3">
+            <button type="submit" class="btn btn-success col-md-12">Save</button>
+        </div>
+    </div>
+
+</form>

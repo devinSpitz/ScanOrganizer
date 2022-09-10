@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Security.Cryptography.Xml;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ScanOrganizer.Extensions;
 using ScanOrganizer.Models;
 using ScanOrganizer.Services;
 
@@ -17,7 +19,7 @@ public class FolderScanController : Controller
     
     public async Task<IActionResult> Index()
     {
-        return View("Index.cshtml", await _folderScanService.GetAll().ToListAsync());
+        return View("Index", await _folderScanService.GetAll().ToArrayAsync());
     }
     
     public async Task<IActionResult> Remove(int id)
@@ -27,21 +29,38 @@ public class FolderScanController : Controller
             return BadRequest("Invalid id");
         }
         var result = await _folderScanService.Remove(id);
-        
+
         if (result)
-            return Ok("Folder removed");
+            return await Index();
         
         return BadRequest("Failed to remove folder");
     }
     
     public async Task<IActionResult> Upsert(FolderScan folderScan)
     {
-        if (ModelState.IsValid)
+        if (!ModelState.IsValid) return View("Detail.cshtml", folderScan);
+
+        folderScan.Languages = "";
+        foreach (var selectedLanguages in folderScan.LanguagesDictionary)
         {
-            var result = await _folderScanService.Upsert(folderScan);
-            if(result) return await Index();
+               folderScan.Languages += selectedLanguages + ",";
         }
-        return View("Detail.cshtml", folderScan);
+        var result = await _folderScanService.Upsert(folderScan,ModelState);
+        if(result) return await Index();
+        return View("Detail", folderScan);
+    }    
+    public async Task<IActionResult> RemoveExceptions(int id)
+    {
+        if (id <= 0)
+        {
+            return BadRequest("Invalid id");
+        }
+        var result = await _folderScanService.RemoveExceptions(id);
+
+        if (result)
+            return await Index();
+        
+        return BadRequest("Failed to remove exceptions from ScanFolder");
     }
     
     public async Task<IActionResult> EditFolder(int? id)
@@ -50,11 +69,15 @@ public class FolderScanController : Controller
         
         if(id==null)
         {
-            return View("Detail.cshtml", folderScan);
+            folderScan.LanguagesDictionary = ScanOrganizeHelper.GetSelectedLanguagesList(folderScan.Languages).ToList();
+            return View("Detail", folderScan);
         }
         
+        
         folderScan =  await _folderScanService.GetAll().FirstOrDefaultAsync(x => x.Id == id);
-        return View("Detail.cshtml", folderScan);
+        
+        folderScan.LanguagesDictionary = ScanOrganizeHelper.GetSelectedLanguagesList(folderScan.Languages).ToList();
+        return View("Detail", folderScan);
     }
     public async Task<IActionResult> Enable(int id)
     {
@@ -65,7 +88,7 @@ public class FolderScanController : Controller
         
         var result = await _folderScanService.ActivateById(id);
         if(result)
-            return Ok("Folder activated");
+            return await Index();
         
         return BadRequest("Folder not activated");
     }
@@ -79,7 +102,7 @@ public class FolderScanController : Controller
         
         var result = await _folderScanService.DeactivateById(id);
         if(result)
-            return Ok("Folder Deactivated");
+            return await Index();
         
         return BadRequest("Folder not Deactivated");
     }

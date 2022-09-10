@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApplication1.Data;
 
@@ -10,9 +11,10 @@ using WebApplication1.Data;
 namespace ScanOrganizer.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220910112240_Exceptions")]
+    partial class Exceptions
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.8");
@@ -58,11 +60,13 @@ namespace ScanOrganizer.Migrations
                     b.Property<int?>("FolderScanId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("InnerExceptionMessage")
+                    b.Property<int>("HResult")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("HelpLink")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Message")
-                        .IsRequired()
+                    b.Property<string>("Source")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

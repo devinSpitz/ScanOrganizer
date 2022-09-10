@@ -3,7 +3,18 @@
 
 Features:
 =======
-*
+* Sort your scans into folders by SortTags
+* Add Folders to the monitoring to automatically sort new scans in form of images or pdfs
+
+Good to know:
+=======
+* Images are just internally converted to pdfs on a file per file base. Multiple images are not getting group into single files.
+
+Tips:
+=======
+Use this software with naps2 to also group your scans into one file when needed.
+[Naps2](https://github.com/cyanfish/naps2)
+
 
 Donate:
 =======
@@ -24,14 +35,6 @@ For business inquiries please use:
 Credits:
 =======
 
-Serilog  
-This package routes ASP.NET Core log messages through Serilog, so you can get information about ASP.NET's internal operations written to the same Serilog sinks as your application events.  
-https://github.com/serilog/serilog-aspnetcore
-
-Mock & Automock  
-An automocking container for Moq. Use this if you're invested in your IoC container and want to decouple your unit tests from changes to their constructor arguments.
-https://github.com/moq/Moq.AutoMocker  
-
 Boostrap:   
 The most popular front-end framework for developing responsive, mobile first projects on the web.  
 https://getbootstrap.com
@@ -39,7 +42,6 @@ https://getbootstrap.com
 Datatables:   
 Add advanced interaction controls to your HTML tables the free & easy way  
 https://github.com/DataTables/Dist-DataTables  
-
 
 Hangfire  
 An easy and reliable way to perform fire-and-forget, delayed and recurring, long-running, short-running,   
@@ -54,18 +56,14 @@ Bootswatch
 Free themes for Bootstrap  
 https://bootswatch.com/  
 
-PdfSharpCore  
-PdfSharp for .NET Core  PdfSharpCore is a partial port of PdfSharp.Xamarin for .NET Core Additionally MigraDoc has been ported as well (from version 1.32). Images have been implemented with ImageSharp from https://www.nuget.org/packages/SixLabors.ImageSharp
-https://github.com/ststeiger/PdfSharpCore 
+PdfiumViewer
+PDF viewer based on the PDFium project.
+https://github.com/pvginkel/PdfiumViewer
 
-Tesseract  
-Tesseract 4 adds a new neural net (LSTM) based OCR engine which is focused on line recognition, but also still supports the legacy Tesseract OCR engine of Tesseract 3 which works by recognizing character patterns. Compatibility with Tesseract 3 is enabled by using the Legacy OCR Engine mode (--oem 0). It also needs traineddata files which support the legacy engine, for example those from the tessdata repository.
-https://github.com/charlesw/tesseract/
+TesseractSharp
+https://github.com/shift-technology/TesseractSharp
+.NET Wrapper for tessaract v5.0.0.20190623
 
-Swagger tools for documenting APIs built on ASP.NET Core  
-https://github.com/domaindrivendev/Swashbuckle.AspNetCore
-
-  
 Thanks to all this people who worked for this nuget packages. Without that it wouldn't be possible to do this.  
 
 
