@@ -9,9 +9,8 @@ jobs:
   build:
     docker:
       - image: mcr.microsoft.com/dotnet/sdk:6.0
-    steps:    
-      - attach_workspace:
-          at: ./artifacts  
+    steps:
+      - checkout
       - run:
           working_directory: ./artifacts/ScanOrganizer
           name: Run Build Windows
@@ -60,7 +59,7 @@ workflows:
   BuildRelease: # This is the name of the workflow, feel free to change it to better match your workflow.
     # Inside the workflow, you define the jobs you want to run.
     jobs:
-      - build
+      - build:
       - publish-github-release:
           requires:
             - build
