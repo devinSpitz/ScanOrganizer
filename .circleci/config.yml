@@ -42,7 +42,7 @@ jobs:
       - image: circleci/golang:1.17.2
     steps:
       - attach_workspace:
-          at: ./artifacts
+          at: .
       - run:
           working_directory: .
           name: "Publish Release on GitHub"
