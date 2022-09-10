@@ -40,6 +40,12 @@ public class FolderScanService
             return false;
         }
         
+        if(!folderScan.ResultFolderPath.EndsWith("\\"))
+            modelStateDictionary?.AddModelError("ResultFolderPath", "The path has to end with \\");
+        
+        if(!folderScan.MonitorFolderPath.EndsWith("\\"))
+            modelStateDictionary?.AddModelError("MonitorFolderPath", "The path has to end with \\");
+        
         //write test file into folderScan.ResultFolderPath and remove to check if folder is writable
         if (!await IsFolderWriteable(folderScan.ResultFolderPath))
         {
