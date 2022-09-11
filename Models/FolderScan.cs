@@ -13,7 +13,7 @@ public class FolderScan
     public string ResultFolderPath { get; set; } = "";
     
     [DisplayName("Enabled")]
-    public bool IsActive { get; set; } = false;
+    public bool IsActive { get; set; } = true;
     
     [DisplayName("Include subfolders")]
     public bool IncludeSubFolders { get; set; } = true;
