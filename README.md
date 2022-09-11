@@ -32,6 +32,7 @@ Tutorials:
 * [Quick Start Guide](https://github.com/devinSpitz/ScanOrganizer/wiki/Quick-Start-Guide)
 * [NSSM How to](https://github.com/devinSpitz/ScanOrganizer/wiki/NSSM---How-to)
 * [Naps How-to](https://github.com/devinSpitz/ScanOrganizer/wiki/NAPS---How-To)
+* [Naps How-to set es default scanner app](https://github.com/devinSpitz/ScanOrganizer/wiki/Naps---How-to-set-as-default-scanner-app-on-button-touch)
 
 Good to know:
 =======
