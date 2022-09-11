@@ -1,4 +1,13 @@
 # ScanOrganizer
+
+![GitHub All Releases](https://img.shields.io/github/downloads/devinspitz/ScanOrganizer/total)
+![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/devinspitz/ScanOrganizer?label=release)
+![Platforms](https://img.shields.io/static/v1?label=platform:&message=windows10%20|%20linux(untested)&color=green)
+[![CodeFactor](https://codefactor.io/repository/github/devinspitz/scanorganizer/badge)](https://www.codefactor.io/repository/github/devinspitz/scanorganizer)
+[![CircleCI](https://circleci.com/gh/devinSpitz/PavlovRconWebserver/tree/master.svg?style=shield)](https://circleci.com/gh/devinSpitz/PavlovRconWebserver/tree/circleci-project-setup)
+[![Discord](https://badgen.net/discord/members/G5VpbgdYey)](http://dc.spitzen.solutions)  
+
+
 <img src="./Art/storage-20-512.png" width="200" />
 
 
@@ -13,12 +22,15 @@ Features:
 Installation:
 =======
 * Download the latest release
-* Download [NSSM](https://nssm.cc/download) and extract the exe to the same folder as ScanOrganizer.exe
-* Copy the x64 nssm.exe to the ScanOrganizer folder
-* Run the following command in the ScanOrganizer folder in cmd as Administrator: `nssm.exe install ScanOrganizer`
-* And also: `nssm.exe start ScanOrganizer`
-* Note in PowerShell use ./nssm.exe instead of nssm.exe
+* I made a small how-to for making the ScanOrganizer a service so it does start automatically on restart etc.
+  * [NSSM How to](https://github.com/devinSpitz/ScanOrganizer/wiki/NSSM---How-to)
 * After the Scan Organizer should be ready to configure via your Browser: [http://localhost:5000/](http://localhost:5000/)
+    * [Quick Start Guide](https://github.com/devinSpitz/ScanOrganizer/wiki/Quick-Start-Guide)
+
+Quick Start Guide:
+=======
+* [https://github.com/devinSpitz/ScanOrganizer/wiki/Quick-Start-Guide](https://github.com/devinSpitz/ScanOrganizer/wiki/Quick-Start-Guide)
+
 
 Good to know:
 =======
@@ -26,8 +38,9 @@ Good to know:
 
 Tips:
 =======
-Use this software with naps2 to also group your scans into one file when needed.
-[Naps2](https://github.com/cyanfish/naps2)
+* Use this software with naps2 to also group your scans into one file when needed. [Naps2](https://github.com/cyanfish/naps2)  
+   * I made a little how to [Naps How-to](https://github.com/devinSpitz/ScanOrganizer/wiki/NAPS---How-To)
+
 
 
 Donate:
