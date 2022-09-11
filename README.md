@@ -93,7 +93,7 @@ https://github.com/shift-technology/TesseractSharp
 
 Newtonsoft.Json  
 Json.NET is a popular high-performance JSON framework for .NET
-.NET Wrapper for tessaract v5.0.0.20190623  
+https://github.com/JamesNK/Newtonsoft.Json
 
 Thanks to all this people who worked for this nuget packages. Without that it wouldn't be possible to do this.  
 
