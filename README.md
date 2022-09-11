@@ -1,23 +1,28 @@
 # ScanOrganizer
+<img src="./Art/storage-20-512.png" width="200" />
+
 
 Features:
 =======
-* Sort your scans into folders by SortTags
-* Add Folders to the monitoring to automatically sort new scans in form of images or pdfs
+* Sort your scans (Images, Pdfs) into folders by SortTags
+* Add Folders to the monitoring to automatically sort new scans
+* Add PrimaryFolder or SecondaryFolder SortTags to define the folder structure
+
+
 
 Installation:
 =======
-* Download latest release
+* Download the latest release
 * Download [NSSM](https://nssm.cc/download) and extract the exe to the same folder as ScanOrganizer.exe
 * Copy the x64 nssm.exe to the ScanOrganizer folder
 * Run the following command in the ScanOrganizer folder in cmd as Administrator: `nssm.exe install ScanOrganizer`
 * And also: `nssm.exe start ScanOrganizer`
-* Note in powershell use ./nssm.exe instead of nssm.exe
+* Note in PowerShell use ./nssm.exe instead of nssm.exe
 * After the Scan Organizer should be ready to configure via your Browser: [http://localhost:5000/](http://localhost:5000/)
 
 Good to know:
 =======
-* Images are just internally converted to pdfs on a file per file base. Multiple images are not getting group into single files.
+* Images are just internally converted to pdfs on a file per file base. Multiple images are not getting grouped into single files.
 
 Tips:
 =======
@@ -65,13 +70,17 @@ Bootswatch
 Free themes for Bootstrap  
 https://bootswatch.com/  
 
-PdfiumViewer
-PDF viewer based on the PDFium project.
-https://github.com/pvginkel/PdfiumViewer
+PdfiumViewer  
+PDF viewer based on the PDFium project.  
+https://github.com/pvginkel/PdfiumViewer  
 
 TesseractSharp
+.NET Wrapper for tessaract v5.0.0.20190623  
 https://github.com/shift-technology/TesseractSharp
-.NET Wrapper for tessaract v5.0.0.20190623
+
+Newtonsoft.Json  
+Json.NET is a popular high-performance JSON framework for .NET
+.NET Wrapper for tessaract v5.0.0.20190623  
 
 Thanks to all this people who worked for this nuget packages. Without that it wouldn't be possible to do this.  
 

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace ScanOrganizer.Models;
 
@@ -12,7 +13,10 @@ public class SortTag
     public int Id { get; set; }
     public string FindTag { get; set; } = "";
     public string FolderName { get; set; } = "";
-    public bool IsActive { get; set; } = false;
+    public bool IsActive { get; set; } = true;
+    
+    [DisplayName("Case-insensitive")]
+    public bool CaseInsensitive { get; set; } = true;
     
     /// <summary>
     /// high wins

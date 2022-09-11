@@ -37,6 +37,7 @@
 
     <ItemGroup>
       <Content Include=".circleci\config.yml" />
+      <Content Include="Art\storage-20-512.png" />
     </ItemGroup>
 
     <ItemGroup>

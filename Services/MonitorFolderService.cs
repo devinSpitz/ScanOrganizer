@@ -33,12 +33,14 @@ public class MonitorFolderService
                 FolderWatches.Remove(folderWatch);
             }
             
-            //Update all folder watches that are active and in the database
+            //Remove all folder watches that are active and in the database so we can update them
             foreach (var folderScan in folderScans.Where(folderScan => FolderWatches.Any(x => x.Scan.Id == folderScan.Id)))
             {
                 var folderWatch = FolderWatches.FirstOrDefault(x => x.Scan.Id == folderScan.Id);
-                if (folderWatch != null) 
-                    folderWatch.Scan = folderScan;
+                if (folderWatch != null)
+                {
+                    ShutdownWatch(folderWatch);
+                }
             }
             
             
@@ -58,11 +60,14 @@ public class MonitorFolderService
     private void OnError(FolderWatch watch, Exception e)
     {
         RecurringJob.TriggerJob("MonitorFolderService.MonitorFolders");
-        watch.Watcher?.Dispose();
-        FolderWatches.Remove(watch);
-        
+        ShutdownWatch(watch);
+
         ScanOrganizeHelper.AddExceptionToWatch(watch, e, _scopeFactory);
     }
 
-    
+    private static void ShutdownWatch(FolderWatch watch)
+    {
+        watch.Watcher?.Dispose();
+        FolderWatches.Remove(watch);
+    }
 }

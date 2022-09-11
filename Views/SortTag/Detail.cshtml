@@ -35,6 +35,11 @@
                 </div>
                 
                     <div class="form-group col-md-2">
+                        <label asp-for="CaseInsensitive"></label>
+                        <input asp-for="CaseInsensitive" class="form-control form-check-input" value="@Model.CaseInsensitive"/>
+                        <span asp-validation-for="CaseInsensitive" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-2">
                         <label asp-for="SortOrder"></label>
                         <input asp-for="SortOrder" class="form-control" value="@Model.SortOrder"/>
                         <span asp-validation-for="SortOrder" class="text-danger"></span>

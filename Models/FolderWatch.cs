@@ -170,12 +170,22 @@ public class FolderWatch
             }
         }
         else
-        {   
-            if (text.Contains(tag.FindTag))
+        {
+            var toCheck = tag.FindTag;
+            var textToUse = text;
+            
+            if (tag.CaseInsensitive)
+            {
+                toCheck = toCheck.ToLower();
+                textToUse = textToUse.ToLower();
+            }
+            
+            if (textToUse.Contains(toCheck))
             {
                 resultFolder += "/" + tag.FolderName + "/";
                 return resultFolder;
             }
+            
         }
 
         return resultFolder;

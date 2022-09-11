@@ -19,6 +19,7 @@
                     <th>Id</th>
                     <th>Actions</th>
                     <th>FindTag</th>
+                    <th>Case-insensitive</th>
                     <th>FolderName</th>
                     <th>IsActive</th>
                     <th>SortOrder</th>
@@ -62,6 +63,7 @@
                             </a>
                         </td>
                         <td> @sortTag.FindTag </td>
+                        <td> @sortTag.CaseInsensitive </td>
                         <td> @sortTag.FolderName </td>
                         <td> @sortTag.IsActive </td>
                         <td> @sortTag.SortOrder </td>
@@ -79,7 +81,7 @@
         debugger;
          let table = $("#Datatables");
           table.DataTable({
-               "order": [[ 4, "desc" ],[ 5, "asc" ]],
+               "order": [[ 5, "desc" ],[ 6, "asc" ]],
               responsive: true,
               "autoWidth": true,
               filter: true, 
