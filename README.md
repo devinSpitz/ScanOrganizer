@@ -27,10 +27,11 @@ Installation:
 * After the Scan Organizer should be ready to configure via your Browser: [http://localhost:5000/](http://localhost:5000/)
     * [Quick Start Guide](https://github.com/devinSpitz/ScanOrganizer/wiki/Quick-Start-Guide)
 
-Quick Start Guide:
+Tutorials:
 =======
-* [https://github.com/devinSpitz/ScanOrganizer/wiki/Quick-Start-Guide](https://github.com/devinSpitz/ScanOrganizer/wiki/Quick-Start-Guide)
-
+* [Quick Start Guide](https://github.com/devinSpitz/ScanOrganizer/wiki/Quick-Start-Guide)
+* [NSSM How to](https://github.com/devinSpitz/ScanOrganizer/wiki/NSSM---How-to)
+* [Naps How-to](https://github.com/devinSpitz/ScanOrganizer/wiki/NAPS---How-To)
 
 Good to know:
 =======
@@ -40,6 +41,12 @@ Tips:
 =======
 * Use this software with naps2 to also group your scans into one file when needed. [Naps2](https://github.com/cyanfish/naps2)  
    * I made a little how to [Naps How-to](https://github.com/devinSpitz/ScanOrganizer/wiki/NAPS---How-To)
+
+Linux:
+=======
+* Would be cool if someone with linux and a scanner could test this software and give me some feedback.  
+   * I think it should work but I don't have a linux machine with a scanner to test it.
+
 
 
 
